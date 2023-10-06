@@ -1,0 +1,8 @@
+.main{
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   width: inherit;
+   background-color: lightgray;
+   min-height: 91vh;
+   padding: 1rem;
+}
