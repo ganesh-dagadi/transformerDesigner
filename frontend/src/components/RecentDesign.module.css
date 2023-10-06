@@ -1,0 +1,8 @@
+.main{
+   text-align: justify;
+   width: inherit;
+   display: flex;
+   flex-direction: column;
+   gap: 0.2rem;
+   padding: 0.8rem;
+}

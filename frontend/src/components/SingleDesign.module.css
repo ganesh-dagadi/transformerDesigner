@@ -1,0 +1,25 @@
+.main{
+   display: grid;
+   grid-template-columns: 1fr 3fr 1fr 1fr;
+   width: 70%;
+   padding: 0.3rem;
+   background-color: rgb(181, 182, 184);
+   border-radius: 0.3rem;
+}
+
+.container{
+   display: flex;
+   flex-direction: column;
+   gap: 0.3rem;
+}
+
+.timeContainer{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.logo{
+   width: 2.5rem;
+   height: 2.5rem;
+}
