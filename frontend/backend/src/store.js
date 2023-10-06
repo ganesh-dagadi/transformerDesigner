@@ -16,6 +16,21 @@ const store = {
         }
       
         localStorage.setItem(`backend_${projectName}` , JSON.stringify(model))
+    },
+
+    readProjectByName : function(projectName){
+        let projectModel = JSON.parse(localStorage.getItem(`backend_${projectName}`));
+        console.log(projectModel);
+        if(!projectModel) throw new Error("Project not found")
+        return projectModel
+    },
+
+    updateByProjectName : function(projectName , model){
+        localStorage.setItem(`backend_${projectName}` , JSON.stringify(model));
+    },
+
+    getAllProjects : function(){
+        return JSON.parse(localStorage.getItem("backend_projectsList"));
     }
 }
 
