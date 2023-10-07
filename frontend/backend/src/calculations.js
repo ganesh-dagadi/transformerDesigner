@@ -397,15 +397,16 @@ const calculator = {
         let strayLossLV = Math.pow(
             (model.input.winding.lv.wireBare2 / 10) * Math.sqrt(((model.input.winding.lv.wireBare1 * (model.output.winding.lv.turnPerLayer + 1)) * model.output.coreLoss.kr_imp_v) / model.output.winding.lv.windLength) * (model.input.general.windingMaterial === "CU" ? 0.9622 : 0.7618),
             4
-        ) * (Math.pow(model.input.winding.lv.layers * model.input.winding.lv.noParallelRA1 , 2 / 9)) * 100;
+        ) * (Math.pow(model.input.winding.lv.layers * model.input.winding.lv.noParallelRA1 , 2)/ 9) * 100;
         model.output.winding.lv.strayLoss = strayLossLV;
-        // console.log((model.input.winding.lv.wireBare1 * (model.output.winding.lv.turnPerLayer + 1)));
+        //  console.log((model.input.winding.lv.wireBare1 * (model.output.winding.lv.turnPerLayer + 1)));
+        console.log(model.input.general.windingMaterial === "CU" ? 0.9622 : 0.7618);
         // console.log(model.output.coreLoss.kr_imp_v);
         // console.log( model.output.winding.lv.windLength);
         let strayLossHV = Math.pow(
-            (model.input.winding.hv.wireBare2 / 10) * Math.sqrt(((model.input.winding.hv.wireBare1 * (model.output.winding.hv.turnPerLayer + 1)) * model.output.coreLoss.kr_imp_v) / model.output.winding.hv.windLength) * (model.input.general.windingMaterial === "CU" ? 0.9622 : 0.7618),
+            (model.input.winding.hv.wireBare2 / 10) * Math.sqrt(((model.input.winding.hv.wireBare2 * (model.output.winding.hv.turnPerLayer + 1)) * model.output.coreLoss.kr_imp_v) / model.output.winding.hv.windLength) * (model.input.general.windingMaterial === "CU" ? 0.9622 : 0.7618),
             4
-        ) * (Math.pow(model.input.winding.hv.layers * model.input.winding.hv.noParallelRA1 , 2 / 9)) * 100;
+        ) * (Math.pow(model.input.winding.hv.layers * model.input.winding.hv.noParallelRA1 , 2) / 9) * 100;
         model.output.winding.hv.strayLoss = strayLossHV;
         return model
     },
@@ -444,9 +445,9 @@ const calculator = {
     },
     calculateLoadLoss : function(model){
         model.output.winding.lv.loadLoss = (Math.pow(model.output.winding.lv.ratedCurrent,2)) *
-        model.output.winding.lv.Resistance * 3 * (1 + model.output.winding.lv.strayLoss) 
+        model.output.winding.lv.Resistance * 3 * (1 + model.output.winding.lv.strayLoss /100) 
         model.output.winding.hv.loadLoss = (Math.pow(model.output.winding.hv.ratedCurrent , 2)) *
-        model.output.winding.hv.Resistance * 3 * (1 + model.output.winding.hv.strayLoss) 
+        model.output.winding.hv.Resistance * 3 * (1 + model.output.winding.hv.strayLoss /100) 
         return model
     },
     calculateS_am2 : function(model){
@@ -463,7 +464,7 @@ const calculator = {
     },
     calculateWdg_Temp_Rise : function(model){
         model.output.winding.lv.wdg_temp_rise = 15 + model.output.winding.lv.W_m2 / 5
-        model.output.winding.hv.wdg_temp_rise = 15 + model.output.winding.hv.W_m2 / 5
+        model.output.winding.hv.wdg_temp_rise = model.output.winding.hv.W_m2 / 7
         return model
     },
     calculateL_Id_D : function(model){
