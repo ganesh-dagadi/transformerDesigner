@@ -129,6 +129,10 @@ const model = {
                 core1 : 0.0, //to be changed later
                 netCrossSection: 0.0,
                 stackingFactor : 0.0,
+                L_ID_D : 0.0,
+                L_OD_D : 0.0,
+                H_ID_D : 0.0,
+                H_OD_D : 0.0
             }
         }
     }

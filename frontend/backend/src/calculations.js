@@ -2,14 +2,14 @@ import constants from "./constants"
 
 const calculator = {
     calculateRatedVoltage : function(model){
-       if (model.input.winding.lv.connectionType === "STAR"){
-            model.output.winding.lv.ratedVoltage = model.input.winding.lv.voltage/1.732
+       if (model.input.winding.lv.connectionType == "STAR"){
+            model.output.winding.lv.ratedVoltage = model.input.winding.lv.voltage / 1.732
        }
        else{
             model.output.winding.lv.ratedVoltage = model.input.winding.lv.voltage
        }
-       if(model.input.winding.hv.connectionType === "STAR"){
-            model.output.winding.hv.ratedVoltage = model.input.winding.hv.voltage/1.732
+       if(model.input.winding.hv.connectionType == "STAR"){
+            model.output.winding.hv.ratedVoltage = model.input.winding.hv.voltage / 1.732
        }
        else{
             model.output.winding.hv.ratedVoltage = model.input.winding.hv.voltage
@@ -17,11 +17,11 @@ const calculator = {
        return model
     },
     calculate_v_t : function(model){
-        model.output.general.v_t = 1.01*Math.sqrt(model.input.general.power/3) * model.input.general.k/100
+        model.output.general.v_t = 1.01*Math.sqrt(model.input.general.power/3) * model.input.general.k / 100
         return model
     },
     calculateWireInsulated : function(model){
-        if(model.input.winding.lv.insulationType === "FOIL"){
+        if(model.input.winding.lv.insulationType == "FOIL"){
             model.output.winding.lv.wireInsulated1 = model.input.winding.lv.wireBare1
             model.output.winding.lv.wireInsulated2 = model.input.winding.lv.wireBare2
                
@@ -30,7 +30,7 @@ const calculator = {
             model.output.winding.lv.wireInsulated1 = model.input.winding.lv.wireBare1 + model.input.winding.lv.insulation
             model.output.winding.lv.wireInsulated2 = model.input.winding.lv.wireBare2 + model.input.winding.lv.insulation
         }
-        if(model.input.winding.hv.insulationType === "FOIL"){
+        if(model.input.winding.hv.insulationType == "FOIL"){
             model.output.winding.hv.wireInsulated1 = model.input.winding.hv.wireBare1
             model.output.winding.hv.wireInsulated2 = model.input.winding.hv.wireBare2
         }
@@ -45,7 +45,7 @@ const calculator = {
         let y;
         let g;
         let h;
-        if(model.input.winding.lv.wireBare2 <= 16){
+        if(model.input.winding.lv.wireBare2 <= 1.6){
             y = 0.216
         }
         else if(model.input.winding.lv.wireBare2 <= 2.24){
@@ -60,11 +60,11 @@ const calculator = {
         else{
             y = 1.34
         }
-        if(model.input.winding.lv.wireBare1 === model.input.winding.lv.wireBare2){
-            x = model.input.winding.lv.wireBare1*model.input.winding.lv.wireBare2*0.7854
+        if(model.input.winding.lv.wireBare1 == model.input.winding.lv.wireBare2){
+            x = model.input.winding.lv.wireBare1*model.input.winding.lv.wireBare2 * 0.7854
         }
         else {
-        if(model.input.winding.lv.insulationType === "FOIL"){
+        if(model.input.winding.lv.insulationType == "FOIL"){
             x = model.input.winding.lv.wireBare1*model.input.winding.lv.wireBare2
         }
         else{
@@ -72,7 +72,7 @@ const calculator = {
         }
 
         }
-        if(model.input.winding.hv.wireBare2 <= 16){
+        if(model.input.winding.hv.wireBare2 <= 1.6){
             h = 0.216
         }
         else if(model.input.winding.hv.wireBare2 <= 2.24){
@@ -87,11 +87,11 @@ const calculator = {
         else{
             h = 1.34
         }
-        if(model.input.winding.hv.wireBare1 === model.input.winding.hv.wireBare2){
+        if(model.input.winding.hv.wireBare1 == model.input.winding.hv.wireBare2){
             g = model.input.winding.hv.wireBare1*model.input.winding.hv.wireBare2*0.7854
         }
         else {
-        if(model.input.winding.hv.insulationType === "FOIL"){
+        if(model.input.winding.hv.insulationType == "FOIL"){
             g = model.input.winding.hv.wireBare1*model.input.winding.hv.wireBare2
         }
         else{
@@ -103,13 +103,13 @@ const calculator = {
         return model
     },
     calculateRatedCurrent : function(model){
-        if(model.input.winding.lv.connectionType === "STAR"){
+        if(model.input.winding.lv.connectionType == "STAR"){
             model.output.winding.lv.ratedCurrent = (model.input.general.power*1000)/(Math.sqrt(3)*model.input.winding.lv.voltage)
         }
         else{
             model.output.winding.lv.ratedCurrent = (model.input.general.power*1000)/(3*model.input.winding.lv.voltage)
         }
-        if(model.input.winding.hv.connectionType === "STAR"){
+        if(model.input.winding.hv.connectionType =="STAR"){
             model.output.winding.hv.ratedCurrent = (model.input.general.power*1000)/(Math.sqrt(3)*model.input.winding.hv.voltage)
         }
         else{
@@ -118,8 +118,8 @@ const calculator = {
         return model
     },
     calculateTurnPerLimb: function(model){
-        model.output.winding.lv.turnPerLimb = Math.round(model.input.winding.lv.calculateRatedCurrent/model.output.general.v_t)
-        model.output.winding.hv.turnPerLimb = Math.round(model.input.winding.hv.calculateRatedCurrent/model.output.general.v_t)
+        model.output.winding.lv.turnPerLimb = Math.round(model.input.winding.lv.ratedVoltage/model.output.general.v_t)
+        model.output.winding.hv.turnPerLimb = Math.round(model.input.winding.hv.ratedVoltage/model.output.general.v_t)
         return model
     },
     calculateWindingRadialDepth : function(model){
@@ -149,13 +149,13 @@ const calculator = {
         let x;
         let g;
 
-        if(model.input.winding.lv.insulationType === "FOIL"){
+        if(model.input.winding.lv.insulationType == "FOIL"){
             x = 0
         }
         else{
             x = 1
         }
-        if(model.input.winding.hv.insulationType === "FOIL"){
+        if(model.input.winding.hv.insulationType == "FOIL"){
             g = 0
         }
         else{
@@ -175,8 +175,9 @@ const calculator = {
     },
     calculateBSix : function(model){
         let x;
-        model.output.netCrossSection = model.output.general.v_t/(4.44 * model.input.general.frequency * model.input.general.fluxDensity *0.0001 )
-        if(model.input.coreWdg.steelgradeThick === "CRNO35"){
+        model.output.netCrossSection = model.output.general.v_t/
+        (4.44 * model.input.general.frequency * model.input.general.fluxDensity *0.0001 )
+        if(model.input.coreWdg.steelgradeThick == "CRNO35"){
             x = 0.95
         }
         else{
@@ -188,7 +189,7 @@ const calculator = {
         return model
     },
     calculateI12 : function(model){
-        model.output.others.I12 = model.input.coreWdg.core2 + model.input.coreWdg.limbPlate1
+        model.output.others.I12 = model.input.coreWdg.w_d + model.input.coreWdg.limbPlate1
         return model
     },
     calculateJ12 : function(model){
@@ -266,16 +267,16 @@ const calculator = {
     },
     calculateResistance : function(model){
         let x;
-        if(model.input.general.windingMaterial === "CU"){
-            if(model.input.cooling.windingTemp === 90){
+        if(model.input.general.windingMaterial == "CU"){
+            if(model.input.cooling.windingTemp == 90){
                 x = 44.7
             }
             else{
                 x = 42.76
             }
         }
-        else if(model.input.general.windingMaterial === "AL"){
-            if(model.input.cooling.windingTemp === 90){
+        else if(model.input.general.windingMaterial == "AL"){
+            if(model.input.cooling.windingTemp == 90){
                 x = 28
             }
             else{
@@ -288,7 +289,7 @@ const calculator = {
     },
     calculateStrayLoss : function(model){
         let x;
-        if(model.input.general.windingMaterial === "CU"){
+        if(model.input.general.windingMaterial == "CU"){
             x = 0.9622
         }
         else{
@@ -297,32 +298,32 @@ const calculator = {
         let y = (model.input.winding.lv.wireBare2 / 10) * Math.sqrt(((model.input.winding.lv.wireBare1 *
                 (model.output.winding.lv.turnPerLayer + 1)) / model.output.winding.lv.windLength) *
                 model.output.winding.lv.layers * x)
-        model.output.winding.lv.strayLoss = (y ^ 4) * ((model.output.winding.lv.layers  *
-        model.input.winding.lv.noParallelRA1) ^ 2/9) * 100
+        model.output.winding.lv.strayLoss = Math.pow(y , 4) * (Math.pow((model.output.winding.lv.layers  *
+        model.input.winding.lv.noParallelRA1) , 2/9)) * 100
         let h = (model.input.winding.hv.wireBare2 / 10) * Math.sqrt(((model.input.winding.hv.wireBare1 *
                 (model.output.winding.hv.turnPerLayer + 1)) / model.output.winding.hv.windLength) *
                 model.output.winding.hv.layers * x)
-        model.output.winding.hv.strayLoss = (h ^ 4) * ((model.output.winding.hv.layers  *
-        model.input.winding.hv.noParallelRA1) ^ 2/9) * 100
+        model.output.winding.hv.strayLoss = (Math.pow(h ,4)) * (Math.pow((model.output.winding.hv.layers  *
+        model.input.winding.hv.noParallelRA1) , 2/9)) * 100
         return model
     },
-    calculateConductorWeigth : function(model){
+    calculateConductorWeight : function(model){
         let x;
-        if(model.input.general.windingMaterial === "CU"){
+        if(model.input.general.windingMaterial == "CU"){
             x = 8.89
         }
         else{
             x = 2.7
         }
-        model.output.winding.lv.conductorWeigth = model.output.winding.lv.wireLength * 
+        model.output.winding.lv.conductorWeight = model.output.winding.lv.wireLength * 
         model.output.winding.lv.crossSection * x * 3 / 1000 
-        model.output.winding.hv.conductorWeigth = model.output.winding.hv.wireLength * 
+        model.output.winding.hv.conductorWeight = model.output.winding.hv.wireLength * 
         model.output.winding.hv.crossSection * x * 3 / 1000        
         return model
     },
     calculateWdgLgImp : function(model){
         let x
-        if(model.input.winding.lv.insulationType === "FOIL"){
+        if(model.input.winding.lv.insulationType == "FOIL"){
             x = 0
         }
         else{
@@ -330,7 +331,7 @@ const calculator = {
         }
         model.output.winding.lv.wdg_lg_imp = model.output.winding.lv.windLength - x
         let g
-        if(model.input.winding.hv.insulationType === "FOIL"){
+        if(model.input.winding.hv.insulationType == "FOIL"){
             g = 0
         }
         else{
@@ -340,13 +341,13 @@ const calculator = {
         return model
     },
     calculateLoadLoss : function(model){
-        model.output.winding.lv.loadLoss = (model.output.winding.lv.ratedCurrent ^ 2) *
+        model.output.winding.lv.loadLoss = (Math.pow(model.output.winding.lv.ratedCurrent,2)) *
         model.output.winding.lv.Resistance * 3 * (1 + model.output.winding.lv.strayLoss) 
-        model.output.winding.hv.loadLoss = (model.output.winding.hv.ratedCurrent ^ 2) *
+        model.output.winding.hv.loadLoss = (Math.pow(model.output.winding.hv.ratedCurrent , 2)) *
         model.output.winding.hv.Resistance * 3 * (1 + model.output.winding.hv.strayLoss) 
         return model
     },
-    calcuateS_am2 : function(model){
+    calculateS_am2 : function(model){
         model.output.winding.lv.S_am2 = model.output.winding.lv.turnLength *
         (model.output.winding.lv.wdg_lg_imp / 1000) * (2 + 2 * model.input.winding.lv.oilDucts1)
         model.output.winding.hv.S_am2 = model.output.winding.hv.turnLength *
@@ -362,7 +363,24 @@ const calculator = {
         model.output.winding.lv.wdg_temp_rise = 15 + model.output.winding.lv.W_m2 / 5
         model.output.winding.hv.wdg_temp_rise = 15 + model.output.winding.hv.W_m2 / 5
         return model
-    }
+    },
+    calculateL_Id_D : function(model){
+        model.output.others.L_ID_D = model.output.others.J12 + model.input.coreWdg.gap_bobin
+        return model
+    },
+    calculateL_Od_D : function(model){
+        model.output.others.L_OD_D =  model.output.others.L_ID_D + model.output.others.LV_wdg
+        return model
+    },
+    calcuateH_Id_D : function(model){
+        model.output.others.H_ID_D = model.output.others.L_OD_D + model.input.coreWdg.rho
+        return model
+    },
+    calcuateH_Od_D : function(model){
+        model.output.others.H_OD_D = model.output.others.HV_WDG + model.output.others.H_ID_D
+        return model
+    },
+    
 }
 
 export default calculator
