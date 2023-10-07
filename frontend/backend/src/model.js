@@ -18,7 +18,9 @@ const model = {
                 w_d : 0.0,
                 limbPlate1 : 0.0,
                 limbPlate2 : 0.0,
-                gap_bobin : 0.0
+                gap_bobin : 0.0,
+                steelgradeThick : "",
+                core2 : 0.0
             },
             winding : {
                 lv : {
@@ -125,6 +127,8 @@ const model = {
                 C_dist : 0.0,
                 Yoke_l : 0.0,
                 core1 : 0.0, //to be changed later
+                netCrossSection: 0.0,
+                stackingFactor : 0.0,
             }
         }
     }
