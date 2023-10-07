@@ -1,6 +1,60 @@
 import constants from "./constants"
 
 const calculator = {
+    performCalculations : function(model){
+      
+        this.calculateRatedVoltage(model);
+        this.calculate_v_t(model)
+        this.calculateWireInsulated(model)
+        this.calculateCrossSection(model)
+        this.calculateRatedCurrent(model)
+        this.calculateTurnPerLimb(model)
+        this.calculateWindingRadialDepth(model)
+        this.calculateCurrentDenstiy(model)
+        this.calculateTurnPerLayer(model)
+        this.calculateWindLength(model)
+        this.calculateWdgLgImp(model)
+        this.calculateLimbLength(model)
+        this.calculateBSix(model)
+        this.calculateI12(model)
+        this.calculateJ12(model)
+        this.calculateRone(model)
+        this.calculateLvWdg(model)
+        this.calculateHvWdg(model)
+        this.calculateL_Id(model)
+        this.calculateperimeter1(model)
+        this.calculateRtwo(model)
+        this.calculateL_Od(model)
+        this.calculateperimeter2(model)
+        this.calculateRthree(model)
+        this.calculateRfour(model)
+        this.calculatePerimeter3(model)
+        this.calculatePerimeter4(model)
+        this.calcuateH_Id(model)
+        this.calculateMeanLgLv(model)
+        this.calculateMeanLgHv(model)
+        this.calculateH_Od(model)
+        this.calculateL_Id_D(model)
+        this.calculateL_Od_D(model)
+        this.calcuateH_Id_D(model)
+        this.calcuateH_Od_D(model)
+        this.calculateTurnLength(model)
+        this.calculateC_Dist(model)
+        this.calculateYoke_L(model)
+        this.calculateCore1(model)
+        this.calculateWireLength(model)
+        this.calculateResistance(model)
+        this.calculateBImpV(model)
+        this.calculateHImpV(model)
+        this.calculateKrImpV(model)
+        this.calculateStrayLoss(model)
+        this.calculateConductorWeight(model)
+       
+        this.calculateLoadLoss(model)
+        this.calculateS_am2(model)
+        this.calculateW_m2(model)
+        this.calculateWdg_Temp_Rise(model)
+    },
     calculateRatedVoltage : function(model){
        if (model.input.winding.lv.connectionType == "STAR"){
             model.output.winding.lv.ratedVoltage = model.input.winding.lv.voltage / 1.732
@@ -17,7 +71,8 @@ const calculator = {
        return model
     },
     calculate_v_t : function(model){
-        model.output.general.v_t = 1.01*Math.sqrt(model.input.general.power/3) * model.input.general.k / 100
+        model.output.general.v_t = 1.01*Math.sqrt(model.input.general.power/3) * model.input.general.K / 100
+        console.log("V_T is " , model.output.general.v_t)
         return model
     },
     calculateWireInsulated : function(model){
@@ -118,21 +173,24 @@ const calculator = {
         return model
     },
     calculateTurnPerLimb: function(model){
-        model.output.winding.lv.turnPerLimb = Math.round(model.input.winding.lv.ratedVoltage/model.output.general.v_t)
-        model.output.winding.hv.turnPerLimb = Math.round(model.input.winding.hv.ratedVoltage/model.output.general.v_t)
+        model.output.winding.lv.turnPerLimb = Math.ceil(model.output.winding.lv.ratedVoltage/model.output.general.v_t)
+        model.output.winding.hv.turnPerLimb = Math.ceil(model.output.winding.hv.ratedVoltage/model.output.general.v_t)
         return model
     },
     calculateWindingRadialDepth : function(model){
-        model.output.winding.lv.windRadialDepth = Math.round((((model.output.winding.lv.wireInsulated2 * 
-        model.input.winding.lv.noParallelRA2 * model.input.winding.lv.layers + model.input.winding.lv.oilDucts1 * 
+        model.output.winding.lv.windRadialDepth = Math.round(((model.output.winding.lv.wireInsulated2 * 
+        model.input.winding.lv.noParallelRA1 * model.input.winding.lv.layers + model.input.winding.lv.oilDucts1 * 
         model.input.winding.lv.oilDucts2 + model.input.winding.lv.insulationBwLayers * 
-        (model.input.winding.lv.layers - 1)) * 1.1) / 5 ) * 5)
-
+        (model.input.winding.lv.layers - 1)) * 1.1) / 5) * 5
 
         model.output.winding.hv.windRadialDepth = Math.round((((model.output.winding.hv.wireInsulated2 * 
-        model.input.winding.hv.noParallelRA2 * model.input.winding.hv.layers + model.input.winding.hv.oilDucts1 * 
-        model.input.winding.hv.oilDucts2 + model.input.winding.hv.insulationBwLayers * 
-        (model.input.winding.hv.layers - 1)) * 1.1) / 5 ) * 5)
+            model.input.winding.hv.noParallelRA1 * model.input.winding.hv.layers + model.input.winding.hv.oilDucts1 * 
+            model.input.winding.hv.oilDucts2 + model.input.winding.hv.insulationBwLayers * 
+            (model.input.winding.hv.layers - 1)) * 1.1) / 5 ) * 5)
+        // model.output.winding.hv.windRadialDepth = Math.round((((model.output.winding.hv.wireInsulated2 * 
+        // model.input.winding.hv.noParallelRA2 * model.input.winding.hv.layers + model.input.winding.hv.oilDucts1 * 
+        // model.input.winding.hv.oilDucts2 + model.input.winding.hv.insulationBwLayers * 
+        // (model.input.winding.hv.layers - 1)) * 1.1) / 5 ) * 5)
         return model
     },
     calculateCurrentDenstiy : function(model){
@@ -175,7 +233,7 @@ const calculator = {
     },
     calculateBSix : function(model){
         let x;
-        model.output.netCrossSection = model.output.general.v_t/
+        model.output.others.netCrossSection = model.output.general.v_t/
         (4.44 * model.input.general.frequency * model.input.general.fluxDensity *0.0001 )
         if(model.input.coreWdg.steelgradeThick == "CRNO35"){
             x = 0.95
@@ -183,8 +241,8 @@ const calculator = {
         else{
             x = 0.97
         }
-        model.output.stackingFactor = x
-        model.output.others.B_Six = Math.round((model.output.others.netCrossSection / model.output.others.stackingFactor)/
+        model.output.others.stackingFactor = x
+        model.output.others.B_six = Math.round((model.output.others.netCrossSection / model.output.others.stackingFactor)/
         (model.input.coreWdg.w_d * 0.1) * 10)
         return model
     },
@@ -193,7 +251,7 @@ const calculator = {
         return model
     },
     calculateJ12 : function(model){
-        model.output.others.J12 = model.output.others.B_Six + model.input.coreWdg.limbPlate2
+        model.output.others.J12 = model.output.others.B_six + model.input.coreWdg.limbPlate2
         return model
     },
     calculateRone : function(model){
@@ -230,6 +288,20 @@ const calculator = {
         2 * 3.1416 * model.output.others.R2
         return model
     },
+    calculateRthree(model){
+        model.output.others.R3 = model.output.others.R2 + model.input.coreWdg.rho/2;
+    },
+    calculateRfour(model){
+        model.output.others.R4 = model.output.others.R3 + model.output.winding.hv.windRadialDepth
+    },
+    calculatePerimeter3(model){
+        model.output.others.perimeter3 = (2 * model.input.coreWdg.w_d + 2 * model.output.others.J12) + 
+        2 * 3.1416 * model.output.others.R3
+    },
+    calculatePerimeter4(model){
+        model.output.others.perimeter4 = (2 * model.input.coreWdg.w_d + 2 * model.output.others.J12) + 
+        2 * 3.1416 * model.output.others.R4
+    },
     calcuateH_Id : function(model){
         model.output.others.H_ID = model.output.others.L_OD + model.input.coreWdg.rho
         return model
@@ -238,16 +310,21 @@ const calculator = {
         model.output.others.mean_lg_lv = (model.output.others.perimeter1 + model.output.others.perimeter2)/2
         return model
     },
+    calculateMeanLgHv : function(model){
+        model.output.others.mean_lg_hv = (model.output.others.perimeter2 + model.output.others.perimeter3)/2
+        return model
+    },
     calculateH_Od : function(model){
         model.output.others.H_OD = model.output.others.H_ID + model.output.others.HV_WDG
         return model
     },
     calculateTurnLength : function(model){
         model.output.winding.lv.turnLength = model.output.others.mean_lg_lv / 1000
+        model.output.winding.hv.turnLength = model.output.others.mean_lg_hv/1000
         return model
     },
     calculateC_Dist :  function(model){
-        model.output.others.C_dist = model.output.others.H_OD +  model.intput.coreWdg.am
+        model.output.others.C_dist = model.output.others.H_OD +  model.input.coreWdg.am
         return model
     },
     calculateYoke_L : function(model){
@@ -261,8 +338,8 @@ const calculator = {
         return model
     },
     calculateWireLength : function(model){
-        model.output.winding.lv.wireLength = model.output.winding.lv.turnLength / model.output.winding.lv.turnPerLimb
-        model.output.winding.hv.wireLength = model.output.winding.hv.turnLength / model.output.winding.hv.turnPerLimb
+        model.output.winding.lv.wireLength = model.output.winding.lv.turnLength * model.output.winding.lv.turnPerLimb
+        model.output.winding.hv.wireLength = model.output.winding.hv.turnLength * model.output.winding.hv.turnPerLimb
         return model
     },
     calculateResistance : function(model){
@@ -287,24 +364,49 @@ const calculator = {
         model.output.winding.hv.Resistance =  model.output.winding.hv.wireLength / (model.output.winding.hv.crossSection * x)
         return model
     },
+    calculateHImpV : function(model){
+        model.output.coreLoss.h_imp_v = (model.output.winding.lv.wdg_lg_imp + model.output.winding.hv.wdg_lg_imp)/2;
+        console.log(model.output.winding.lv.wdg_lg_imp + model.output.winding.hv.wdg_lg_imp)
+    },
+    calculateBImpV : function(model){
+        model.output.coreLoss.b_imp_v = model.output.winding.lv.windRadialDepth + model.input.coreWdg.rho/2 + model.output.winding.hv.windRadialDepth
+    },
+    calculateKrImpV : function(model){
+        model.output.coreLoss.kr_imp_v = 1 - (1/((model.output.coreLoss.h_imp_v / model.output.coreLoss.b_imp_v) * 3.147))
+    },
     calculateStrayLoss : function(model){
-        let x;
-        if(model.input.general.windingMaterial == "CU"){
-            x = 0.9622
-        }
-        else{
-            x = 0.7618
-        }
-        let y = (model.input.winding.lv.wireBare2 / 10) * Math.sqrt(((model.input.winding.lv.wireBare1 *
-                (model.output.winding.lv.turnPerLayer + 1)) / model.output.winding.lv.windLength) *
-                model.output.winding.lv.layers * x)
-        model.output.winding.lv.strayLoss = Math.pow(y , 4) * (Math.pow((model.output.winding.lv.layers  *
-        model.input.winding.lv.noParallelRA1) , 2/9)) * 100
-        let h = (model.input.winding.hv.wireBare2 / 10) * Math.sqrt(((model.input.winding.hv.wireBare1 *
-                (model.output.winding.hv.turnPerLayer + 1)) / model.output.winding.hv.windLength) *
-                model.output.winding.hv.layers * x)
-        model.output.winding.hv.strayLoss = (Math.pow(h ,4)) * (Math.pow((model.output.winding.hv.layers  *
-        model.input.winding.hv.noParallelRA1) , 2/9)) * 100
+        // let x;
+        // if(model.input.general.windingMaterial == "CU"){
+        //     x = 0.9622
+        // }
+        // else{
+        //     x = 0.7618
+        // }
+        // let y = (model.input.winding.lv.wireBare2 / 10) * Math.sqrt(((model.input.winding.lv.wireBare1 *
+        //         (model.output.winding.lv.turnPerLayer + 1)) / model.output.winding.lv.windLength) *
+        //         model.output.winding.lv.layers * x)
+        // model.output.winding.lv.strayLoss = Math.pow(y , 4) * (Math.pow((model.output.winding.lv.layers  *
+        // model.input.winding.lv.noParallelRA1) , 2/9)) * 100
+        // let h = (model.input.winding.hv.wireBare2 / 10) * Math.sqrt(((model.input.winding.hv.wireBare1 *
+        //         (model.output.winding.hv.turnPerLayer + 1)) / model.output.winding.hv.windLength) *
+        //         model.output.winding.hv.layers * x)
+        // model.output.winding.hv.strayLoss = (Math.pow(h ,4)) * (Math.pow((model.output.winding.hv.layers  *
+        // model.input.winding.hv.noParallelRA1) , 2/9)) * 100
+
+        
+        let strayLossLV = Math.pow(
+            (model.input.winding.lv.wireBare2 / 10) * Math.sqrt(((model.input.winding.lv.wireBare1 * (model.output.winding.lv.turnPerLayer + 1)) * model.output.coreLoss.kr_imp_v) / model.output.winding.lv.windLength) * (model.input.general.windingMaterial === "CU" ? 0.9622 : 0.7618),
+            4
+        ) * (Math.pow(model.input.winding.lv.layers * model.input.winding.lv.noParallelRA1 , 2 / 9)) * 100;
+        model.output.winding.lv.strayLoss = strayLossLV;
+        // console.log((model.input.winding.lv.wireBare1 * (model.output.winding.lv.turnPerLayer + 1)));
+        // console.log(model.output.coreLoss.kr_imp_v);
+        // console.log( model.output.winding.lv.windLength);
+        let strayLossHV = Math.pow(
+            (model.input.winding.hv.wireBare2 / 10) * Math.sqrt(((model.input.winding.hv.wireBare1 * (model.output.winding.hv.turnPerLayer + 1)) * model.output.coreLoss.kr_imp_v) / model.output.winding.hv.windLength) * (model.input.general.windingMaterial === "CU" ? 0.9622 : 0.7618),
+            4
+        ) * (Math.pow(model.input.winding.hv.layers * model.input.winding.hv.noParallelRA1 , 2 / 9)) * 100;
+        model.output.winding.hv.strayLoss = strayLossHV;
         return model
     },
     calculateConductorWeight : function(model){

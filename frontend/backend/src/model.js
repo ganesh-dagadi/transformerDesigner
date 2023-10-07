@@ -118,11 +118,16 @@ const model = {
                 HV_WDG : 0.0,
                 L_ID : 0.0,
                 perimeter1 : 0.0,
-                R2 : 0.0, // to be changed later
+                R2 : 0.0, // to be changed later,
+                R3 : 0.0,
+                R4 : 0.0,
+                perimeter3 : 0.0,
+                perimeter4 : 0.0,
                 L_OD : 0.0 , 
                 permiter2 : 0.0,
                 H_ID : 0.0,
                 mean_lg_lv : 0.0,
+                mean_lg_hv : 0.0,
                 H_OD : 0.0,
                 C_dist : 0.0,
                 Yoke_l : 0.0,
@@ -132,7 +137,13 @@ const model = {
                 L_ID_D : 0.0,
                 L_OD_D : 0.0,
                 H_ID_D : 0.0,
-                H_OD_D : 0.0
+                H_OD_D : 0.0,
+
+            },
+            coreLoss : {
+                h_imp_v : 0.0,
+                b_imp_v : 0.0,
+                kr_imp_v : 0.0
             }
         }
     }

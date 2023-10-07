@@ -16,9 +16,7 @@ const backend = {
     },
     calculate(projectName){
         let model = store.readProjectByName(projectName);
-        console.log( "Model before change" , model)
-        calculations.calculateRatedVoltage(model);
-        console.log("model after change" , model)
+        calculations.performCalculations(model)
         store.updateByProjectName(projectName , model)
     }
 }
