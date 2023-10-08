@@ -14,7 +14,14 @@ export default function NewDesign(){
          input: state,
          output
       };
-      backend.createNewProject(projectName, model);
+      try{
+         backend.createNewProject(projectName, model);
+      }
+      catch(error){
+         if(error.message === "Project name is already taken"){
+            backend.saveIntoProject(projectName, model);
+         }
+      }
       navigate("/second");
    }
 
