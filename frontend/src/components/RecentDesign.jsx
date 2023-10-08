@@ -27,7 +27,6 @@ const data = [
       id: 3,
    }
 ];
-console.log(data);
 
 export default function RecentDesign(){
    return (

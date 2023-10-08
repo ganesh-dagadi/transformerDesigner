@@ -4,7 +4,6 @@ import logo from  "../assets/sketch.png";
 export default function SingleDesign(props){
    const information = {...props};
    const data = information.single;
-   console.log(data);
 
    return (
       <div className={styles.main}>
