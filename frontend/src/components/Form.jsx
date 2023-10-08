@@ -19,6 +19,7 @@ export default function PrimaryForm(props){
          output
       };
       backend.saveIntoProject(projectName, model);
+      navigate("/display");
    }
 
    return (

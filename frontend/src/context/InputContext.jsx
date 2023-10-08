@@ -8,6 +8,9 @@ let output = {...backend.generateNewModel().output};
 
 function reducer(state, action){
    switch(action.type){
+      case "updateState":
+         return action.payload;
+
       // Cooling
       case "updateWindTemp":
          return {...state, cooling: {windingTemp: action.payload}};
@@ -118,6 +121,15 @@ function InputContext(props){
          return;
       }
       localStorage.setItem("projectName", JSON.stringify(projectName));
+   }, [projectName]);
+
+   useEffect(function(){
+      const storedValue = JSON.parse(localStorage.getItem(`backend_${projectName}`));
+      if(!storedValue || !storedValue.input){
+         return;
+      }
+      initialState = storedValue.input;
+      dispatch({ type: "updateState", payload: initialState });
    }, [projectName]);
 
    return (

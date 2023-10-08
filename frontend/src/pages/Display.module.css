@@ -1,0 +1,22 @@
+.main{
+   display: flex;
+   flex-direction: column;
+   width: inherit;
+   min-height: 91vh;
+   padding: 1rem;
+   background-color: lightgray;
+   align-items: center;
+}
+
+.display{
+   display: flex;
+   width: 97%;
+   background-color: rgb(179, 178, 178);
+   border-radius: 0.3rem;
+   justify-content: space-around;
+   padding: 1rem;
+}
+
+.data{
+   display: block;
+}

@@ -14,7 +14,7 @@ export default function NewDesign(){
          input: state,
          output
       };
-      backend.saveIntoProject(projectName, model);
+      backend.createNewProject(projectName, model);
       navigate("/second");
    }
 
