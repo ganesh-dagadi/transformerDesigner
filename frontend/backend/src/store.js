@@ -9,6 +9,8 @@ const store = {
             projectsList.forEach(element => {
                 if(element == projectName) throw new Error("Project name is already taken")
             });
+        projectsList.push(projectName);
+        localStorage.setItem("backend_projectsList" , JSON.stringify(projectsList))
         }else{
             projectsList = [];
             projectsList.push(projectName);
