@@ -13,28 +13,24 @@ export default function GeneralForm(){
          <div className={styles.form}>
             <div className={styles.single}>
                <span>Power Rating</span>
-               <span>
-                  <input 
-                  type="number" 
-                  className={styles.input} 
-                  value={parseFloat(general.power) ? parseFloat(general.power) : ""} 
-                  onChange={(e) => dispatch({ type: "updatePower", payload: parseFloat(e.target.value) })}
-                  placeholder="Power Rating"
-                  />kVa
-               </span>
+               <input 
+               type="number" 
+               className={styles.input} 
+               value={parseFloat(general.power) ? parseFloat(general.power) : ""} 
+               onChange={(e) => dispatch({ type: "updatePower", payload: parseFloat(e.target.value) })}
+               placeholder="Power Rating"
+               />
             </div>
 
             <div className={styles.single}>
                <span>Frequency</span>
-               <span>
-                  <input 
-                  type="number" 
-                  className={styles.input} 
-                  value={parseFloat(general.frequency) ? parseFloat(general.frequency) : ""} 
-                  onChange={(e) => dispatch({ type: "updateFrequency", payload: parseFloat(e.target.value) })} 
-                  placeholder="Freqency"
-                  />Hz
-               </span>
+               <input 
+               type="number" 
+               className={styles.input} 
+               value={parseFloat(general.frequency) ? parseFloat(general.frequency) : ""} 
+               onChange={(e) => dispatch({ type: "updateFrequency", payload: parseFloat(e.target.value) })} 
+               placeholder="Freqency"
+               />
             </div>
 
             <div className={styles.single}>

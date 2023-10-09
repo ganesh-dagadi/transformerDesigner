@@ -24,15 +24,14 @@ export default function CoolingForm(){
          <div className={styles.form}>
             <div className={styles.single}>
                <span>Wind Temp</span>
-               <span>
-                  <select 
-                  value={Number(cooling.windingTemp)} 
-                  onChange={(e) => dispatch({ type: "updateWindTemp", payload: Number(e.target.value)})} 
-                  className={styles.input}>
-                     <option value={0}>Select the wind temp</option>
-                     <option value={90}>90</option>
-                     <option value={115}>115</option>
-                  </select>&deg;C</span>
+               <select 
+               value={Number(cooling.windingTemp)} 
+               onChange={(e) => dispatch({ type: "updateWindTemp", payload: Number(e.target.value)})} 
+               className={styles.input}>
+                  <option value={0}>Select the wind temp</option>
+                  <option value={90}>90</option>
+                  <option value={115}>115</option>
+               </select>
             </div>
 
             <h2 className={styles.heading}>Core Wdg</h2>

@@ -1,4 +1,20 @@
 .app{
    width: inherit;
-   height: inherit;
+   min-height: 91vh;
+   display: block;
+   text-align: center;
+   background-color: lightgray;
+   padding: 1rem;
+}
+
+.heading{
+   width: inherit;
+   display: flex;
+   justify-content: space-between;
+}
+
+.image{
+   width: 15rem;
+   height: 7rem;
+   border-radius: 0.5rem;
 }

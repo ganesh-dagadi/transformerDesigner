@@ -6,7 +6,6 @@ import NewDesign from "../components/NewDesign";
 export default function FirstPage(){
    return (
       <div className={styles.mainContainer}>
-         <h1>Transformer Design</h1>
          <div className={styles.container}>
             <div className={styles.container1}>
                <SearchBar />

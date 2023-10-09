@@ -20,3 +20,14 @@
 .data{
    display: block;
 }
+
+.singleData{
+   margin-bottom: 0.3rem;
+   text-align: justify  ;
+   
+}
+
+.odd{
+   background-color: rgb(230, 228, 228);
+}
+

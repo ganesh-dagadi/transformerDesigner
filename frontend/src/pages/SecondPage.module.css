@@ -3,6 +3,6 @@
    grid-template-columns: 1fr 1fr;
    width: inherit;
    background-color: lightgray;
-   min-height: 91vh;
+   height: inherit;
    padding: 1rem;
 }

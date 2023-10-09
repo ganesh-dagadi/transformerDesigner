@@ -29,16 +29,14 @@ export default function PrimaryForm(props){
 
             <div className={styles.single}>
                <span>Voltage</span>
-               <span>
-                  <input
-                  type="number" 
-                  className={styles.input} 
-                  placeholder="Voltage"
-                  value={parseFloat(context.voltage) ? parseFloat(context.voltage) : ""}
-                  onChange={(e) => dispatch({ type: heading === "LV" ? "updateLVVoltage": "updateHVVoltage", 
-                  payload: parseFloat(e.target.value) })}
-                  />V
-               </span>
+               <input
+               type="number" 
+               className={styles.input} 
+               placeholder="Voltage"
+               value={parseFloat(context.voltage) ? parseFloat(context.voltage) : ""}
+               onChange={(e) => dispatch({ type: heading === "LV" ? "updateLVVoltage": "updateHVVoltage", 
+               payload: parseFloat(e.target.value) })}
+               />
             </div>
 
             <div className={styles.single}>
